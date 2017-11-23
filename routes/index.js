@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
-
+var groupsRouter = require('./admin/groups');
+var templatesRouter = require('./admin/templates');
+var charactersRouter = require('./admin/characters');
 var isAuthenticated = function (req, res, next) {
 	// if user is authenticated in the session, call the next() to call the next request handler 
 	// Passport adds this method to request object. A middleware is allowed to add properties to
@@ -37,6 +39,10 @@ module.exports = function(passport){
 		req.logout();
 		res.redirect('/admin');
 	});
+
+	router.use('/groups', isAuthenticated, groupsRouter);
+	router.use('/characters', isAuthenticated, charactersRouter);
+	router.use('/templates', isAuthenticated, templatesRouter);
 
 	return router;
 }
