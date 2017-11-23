@@ -1,7 +1,32 @@
 <div class="container-fluid">
 <div class="ow-content">
-<%- include('common/navigationbar'); %>
+<%- include('components/navigationbar'); %>
 
+<script type="text/javascript">
 
+	var initConfig = function(){
+		var config =  {
+				pageData: <%- JSON.stringify(pageData) %>
+		};
+		return config;
+	};
+	if(typeof ow.disneyapp == 'undefined'){
+		ow.disneyapp = {};
+		ow.disneyapp.config = initConfig();
+	} else {
+		ow.disneyapp.config = initConfig();
+	}
+</script>
+
+<%- include('embededjs/backbone-templates'); %>
+<%- include('embededjs/templates-view'); %>
+<%- include('embededjs/templates-model'); %>
+<%- include('embededjs/templates-collections'); %>
+
+<script type="text/javascript">
+$(document).ready( function() {
+	ow.disneyapp.adminTemplateView = new ow.disneyapp.AdminTemplateView();
+});
+</script>
 </div>
 </div>

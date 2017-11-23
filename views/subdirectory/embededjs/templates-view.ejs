@@ -1,0 +1,44 @@
+<script type="text/javascript">
+//<![CDATA[
+ow.disneyapp.AdminTemplateView= (function(){
+	var DisneyConfig = ow.disneyapp.config;
+	
+	var AdminTemplateView = Backbone.View.extend({
+	tagName: 'tr',
+
+	template: template('templateTemplate'),
+
+	initialize: function() {
+		this.model.on('destroy', this.unrender, this);
+		this.model.on('change', this.render, this);
+	},
+
+	events: {
+		'click a.delete': 'deleteTemplate',
+		'click a.edit'  : 'editTemplate'
+	},
+
+	editTemplate: function() {
+		vent.trigger('contact:edit', this.model);
+		$("#addContact").hide();
+		$("#editContact").show();
+	},
+
+	deleteTemplate: function() {
+		this.model.destroy();
+	},
+
+	render: function() {
+		this.$el.html( this.template( this.model.toJSON() ) );
+		return this;
+	},
+
+	unrender: function() {
+		this.remove();
+	}
+});
+
+	return AdminTemplateView;
+}());
+//]]>
+</script>

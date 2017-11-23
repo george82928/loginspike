@@ -1,0 +1,16 @@
+<script type="text/javascript">
+//<![CDATA[
+ow.disneyapp.AdminTemplateModel = Backbone.Model.extend({
+	validate: function(attrs) {
+		if ( ! attrs.name || ! attrs.display_name || !attrs.external_id ) {
+			return 'Name, display name and external id are required.';
+		}
+	},
+	idAttribute : "id",
+	urlRoot: "/admin/templates",
+	defaults : {
+		id: null
+	}
+});
+//]]>
+</script>
